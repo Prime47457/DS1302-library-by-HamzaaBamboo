@@ -33,6 +33,7 @@
 static void delayUS_DWT(uint32_t us) {
 	volatile uint32_t cycles = (SystemCoreClock/1000000L)*us;
 	volatile uint32_t start = DWT->CYCCNT;
+	DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
 	do  {
 	} while(DWT->CYCCNT - start < cycles);
 }
